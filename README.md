@@ -1,35 +1,15 @@
 # Jekyll::Tailwind
 
-TODO: Delete this and the text below, and describe your gem
+This gem allows you to use [TailwindCSS Standalone CLI][tailwind-cli] in your Jekyll site. The CLI is a standalone executable that you can download and vendor in your project and does not require NodeJS or anything to run.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/jekyll/tailwind`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is the first gem that I publish and it is in a very early stage. I consider it to be pretty stable (it has very little code and no external dependencies other than Jekyll itself) but it is not very customizable yet.
 
-## Installation
+The gem expects that you have the following files in your Jekyll site:
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+- `_tailwind/tailwindcss`: your [Tailwind Standalone CLI][tailwind-cli] executable.
+- `_tailwind/tailwind.config.js`: your Tailwind configuration.
+- `_site/assets/css/app.css`: your CSS file.
 
-Install the gem and add to the application's Gemfile by executing:
+With this in place, the gem works automatically. After you site is built it will update your CSS file.
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jekyll-tailwind.
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+[tailwind-cli]: https://tailwindcss.com/blog/standalone-cli
