@@ -1,18 +1,25 @@
 # frozen_string_literal: true
 
-require_relative "jekyll-tailwind/version"
+# require_relative "jekyll-tailwind/version"
+require_relative "jekyll-tailwind/installer"
 
 require "jekyll"
 require "open3"
 
-module Jekyll
-  class Tailwind
-  end
-end
+# module Jekyll
+#   class Tailwind
+#     def install(target)
+#       # TODO configure the version
+#       version = "3.4.1"
+#       url = URI"https://github.com/tailwindlabs/tailwindcss/releases/download/v#{version}/tailwindcss-#{target}"
+
+
+#     end
+#   end
+# end
 
 Jekyll::Hooks.register [:site], :post_write do |site|
-  tailwind_path = File.expand_path("_tailwind/tailwindcss", site.source)
-  postcss_command = `#{tailwind_path} -i _site/assets/css/app.css -o _site/assets/css/app.css -c _tailwind/tailwind.config.js`
+  Jekyll::Tailwind::Installer.install_and_run
 
   Jekyll.logger.info "Tailwind:", "CSS rebuilt"
 end
