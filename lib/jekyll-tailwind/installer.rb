@@ -25,6 +25,8 @@ module Jekyll
           case RUBY_PLATFORM
           when "arm64-darwin23"
             "macos-arm64"
+          when "x86_64-linux"
+            "linux-x64"
           else
             raise "Tailwind CLI is not available for platform: #{RUBY_PLATFORM}"
           end
