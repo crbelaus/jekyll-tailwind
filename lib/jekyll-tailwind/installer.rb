@@ -42,6 +42,7 @@ module Jekyll
       uri = URI.parse("https://github.com/tailwindlabs/tailwindcss/releases/download/v#{@version}/tailwindcss-#{@target}")
       file = uri.open
 
+      FileUtils.mkdir_p "_tailwind"
       FileUtils.move file.path, @path
       FileUtils.chmod 0o755, @path
 
