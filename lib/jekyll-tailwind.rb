@@ -10,5 +10,5 @@ Jekyll::Hooks.register [:site], :post_write do |site|
     version: site.config.dig("tailwind", "version"),
     config_path: site.config.dig("tailwind", "config_path")
   )
-  tailwind.install_and_run()
+  tailwind.install_and_run
 end

@@ -4,7 +4,6 @@ require "fileutils"
 require "jekyll"
 require "open-uri"
 
-
 module Jekyll
   class Tailwind::Installer
     def initialize(options)
@@ -24,12 +23,11 @@ module Jekyll
     end
 
     def install_and_run
-      install() unless File.exist?(@path)
+      install unless File.exist?(@path)
 
       `#{@path} -i _site/assets/css/app.css -o _site/assets/css/app.css -c #{@config_path}`
       Jekyll.logger.info "Tailwind:", "Rebuilt _site/assets/css/app.css"
     end
-
 
     private
 
