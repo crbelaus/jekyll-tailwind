@@ -4,10 +4,11 @@ require_relative "jekyll-tailwind/version"
 require_relative "jekyll-tailwind/installer"
 
 require "jekyll"
-require "open3"
 
 Jekyll::Hooks.register [:site], :post_write do |site|
-  Jekyll::Tailwind::Installer.install_and_run
-
-  Jekyll.logger.info "Tailwind:", "CSS rebuilt"
+  tailwind = Jekyll::Tailwind::Installer.new(
+    version: site.config.dig("tailwind", "version"),
+    config_path: site.config.dig("tailwind", "config_path")
+  )
+  tailwind.install_and_run()
 end

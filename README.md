@@ -1,15 +1,39 @@
 # Jekyll::Tailwind
 
-This gem allows you to use [TailwindCSS Standalone CLI][tailwind-cli] in your Jekyll site. The CLI is a standalone executable that you can download and vendor in your project and does not require NodeJS or anything to run.
+**This gem allows you integrate the [TailwindCSS Standalone CLI](https://tailwindcss.com/blog/standalone-cli) in your Jekyll site.** The Tailwind CLI is a standalone executable that doesn't need NodeJS or any other external dependency.
 
-This is the first gem that I publish and it is in a very early stage. I consider it to be pretty stable (it has very little code and no external dependencies other than Jekyll itself) but it is not very customizable yet.
+## Set up
 
-The gem expects that you have the following files in your Jekyll site:
+To add this gem to your project you must include it in your Gemfile:
 
-- `_tailwind/tailwindcss`: your [Tailwind Standalone CLI][tailwind-cli] executable.
-- `_tailwind/tailwind.config.js`: your Tailwind configuration.
-- `_site/assets/css/app.css`: your CSS file.
+```ruby
+group :jekyll_plugins do
+  gem 'jekyll-tailwind'
+end
+```
 
-With this in place, the gem works automatically. After you site is built it will update your CSS file.
+**The first time you build your Jekyll site, this gem will automatically download the Tailwind CLI for your platform and use it to build your CSS.** The Tailwind CLI will be saved in `_tailwind/tailwind-VERSION-PLATFORM`. It is recommended that you add this file to your `.gitignore` and don't commit it to your repository.
 
-[tailwind-cli]: https://tailwindcss.com/blog/standalone-cli
+It is important to note that **subsequent runs will use the existing Tailwind CLI and won't download it again.**
+
+## Customize the Tailwind version
+
+Although not strictly necessary, it is recommended to pin your desired Tailwind CLI version in `_config.yml`.
+
+```yml
+tailwind:
+  version: 3.4.1
+```
+
+If you don't do this, the gem will automatically download the latest Tailwind CLI version that was available when gem was published.
+
+## Read the Tailwind configuration from an alternative path
+
+By default Tailwind will read the `tailwind.config.js` file that lives in your project's root (more info at [the Tailwind docs](https://tailwindcss.com/docs/configuration)).
+
+If your configuration file lives elsewhere you can say so in the `_config.yml` file:
+
+```yml
+tailwind:
+  config_path: assets/tailwind.config.js
+```

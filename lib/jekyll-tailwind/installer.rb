@@ -1,41 +1,51 @@
 # frozen_string_literal: true
 
 require "fileutils"
+require "jekyll"
 require "open-uri"
+
 
 module Jekyll
   class Tailwind::Installer
-    def self.install
-      uri = URI.parse("https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.1/tailwindcss-#{target}")
+    def initialize(options)
+      @target =
+        case RUBY_PLATFORM
+        when "arm64-darwin23"
+          "macos-arm64"
+        when "x86_64-linux"
+          "linux-x64"
+        else
+          raise "Tailwind CLI is not available for platform: #{RUBY_PLATFORM}"
+        end
+
+      @version = options[:version] || "3.4.1"
+      @config_path = options[:config_path] || "tailwind.config.js"
+      @path = "_tailwind/tailwind-#{@target}-#{@version}"
+    end
+
+    def install_and_run
+      unless File.exist?(@path)
+        install()
+      end
+
+      `#{@path} -i _site/assets/css/app.css -o _site/assets/css/app.css -c #{@config_path}`
+      Jekyll.logger.info "Tailwind:", "Rebuilt _site/assets/css/app.css"
+    end
+
+
+    private
+
+    def install
+      Jekyll.logger.info "Tailwind:", "CLI version #{@version} not found for #{@target}"
+      Jekyll.logger.info "Tailwind:", "Installing..."
+
+      uri = URI.parse("https://github.com/tailwindlabs/tailwindcss/releases/download/v#{@version}/tailwindcss-#{@target}")
       file = uri.open
 
-      FileUtils.move file.path, cli_path
-      FileUtils.chmod 0o755, cli_path
-    end
+      FileUtils.move file.path, @path
+      FileUtils.chmod 0o755, @path
 
-    def self.cli_path
-      target = self.target
-
-      "_tailwind/tailwind-#{target}"
-    end
-
-    def self.target
-      case RUBY_PLATFORM
-      when "arm64-darwin23"
-        "macos-arm64"
-      when "x86_64-linux"
-        "linux-x64"
-      else
-        raise "Tailwind CLI is not available for platform: #{RUBY_PLATFORM}"
-      end
-    end
-
-    def self.install_and_run
-      unless File.exist?(cli_path)
-        install
-      end
-
-      `#{cli_path} -i _site/assets/css/app.css -o _site/assets/css/app.css -c _tailwind/tailwind.config.js`
+      Jekyll.logger.info "Tailwind:", "CLI installed at #{@path}"
     end
   end
 end
