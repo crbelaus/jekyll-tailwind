@@ -1,6 +1,6 @@
 ## [Unreleased]
 
-## [0.1.0] - 2024-03-13
+## [1.0.0] - 2024-03-13
 
 - Initial release
 - Automatically download Tailwind CLI
