@@ -24,9 +24,7 @@ module Jekyll
     end
 
     def install_and_run
-      unless File.exist?(@path)
-        install()
-      end
+      install() unless File.exist?(@path)
 
       `#{@path} -i _site/assets/css/app.css -o _site/assets/css/app.css -c #{@config_path}`
       Jekyll.logger.info "Tailwind:", "Rebuilt _site/assets/css/app.css"
@@ -42,9 +40,8 @@ module Jekyll
       uri = URI.parse("https://github.com/tailwindlabs/tailwindcss/releases/download/v#{@version}/tailwindcss-#{@target}")
       file = uri.open
 
-      FileUtils.mkdir_p "_tailwind"
-      FileUtils.move file.path, @path
-      FileUtils.chmod 0o755, @path
+      FileUtils.mkdir "_tailwind" unless File.exist?("_tailwind")
+      FileUtils.install file.path, @path, mode: 0o755
 
       Jekyll.logger.info "Tailwind:", "CLI installed at #{@path}"
     end
