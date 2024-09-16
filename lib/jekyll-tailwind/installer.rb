@@ -9,9 +9,9 @@ module Jekyll
     def initialize(options)
       @target =
         case RUBY_PLATFORM
-        when "arm64-darwin23"
+        when /^arm64-darwin/
           "macos-arm64"
-        when "x86_64-darwin23"
+        when /^x86_64-darwin/
           "macos-x64"
         when "x86_64-linux"
           "linux-x64"
