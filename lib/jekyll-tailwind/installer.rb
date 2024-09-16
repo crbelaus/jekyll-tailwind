@@ -11,7 +11,7 @@ module Jekyll
         case RUBY_PLATFORM
         when "arm64-darwin23"
           "macos-arm64"
-        when "x86_64-darwin"
+        when "x86_64-darwin23"
           "macos-x64"
         when "x86_64-linux"
           "linux-x64"
