@@ -11,7 +11,7 @@ module Jekyll
     def initialize(config)
       @config = config.fetch("config_path", "tailwind.config.js")
       @postcss = "postcss.config.js"
-      @inputs = array_wrap(config["input"])
+      @inputs = Array.wrap(config["input"])
       @output = config.fetch("output", "_site/assets/css/app.css")
       @minify = config.fetch("minify", false)
     end
@@ -33,18 +33,18 @@ module Jekyll
 
       `#{command.join(' ')}`
     end
+  end
+end
 
-    private
-
-    # Taken from rails/activesupport/lib/active_support/core_ext/array/wrap.rb
-    def array_wrap(object)
-      if object.nil?
-        []
-      elsif object.respond_to?(:to_ary)
-        object.to_ary || [object]
-      else
-        [object]
-      end
+class Array
+  # Taken from rails/activesupport/lib/active_support/core_ext/array/wrap.rb
+  def self.wrap(object)
+    if object.nil?
+      []
+    elsif object.respond_to?(:to_ary)
+      object.to_ary || [object]
+    else
+      [object]
     end
   end
 end
