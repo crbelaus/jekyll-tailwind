@@ -20,6 +20,7 @@ module Jekyll
       @postcss = "postcss.config.js"
       @inputs = array_wrap(config["input"])
       @output = config.fetch("output", "_site/assets/css/app.css")
+      @minify = config.fetch("minify", false)
     end
 
     def compile
@@ -34,6 +35,7 @@ module Jekyll
         command += ["--input", input]
       end
 
+      command += ["--minify"] if @minify
       command += ["--postcss", @postcss] if File.exist?(@postcss)
 
       `#{command.join(' ')}`

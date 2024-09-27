@@ -49,7 +49,8 @@ tailwind:
   config: config/tailwind.config.js
   input: assets/css/app.css # or [assets/css/app.css, assets/css/web.css]
   output: _site/assets/css/web.css
-  postcss: config/postcss.config.js
+  postcss: config/postcss.config.js # default is nil
+  minify: true # defaults to false
 ```
 
 ## Picking Tailwind version
