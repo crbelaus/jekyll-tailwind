@@ -10,7 +10,7 @@ module Jekyll
 
     def initialize(config)
       @config = config.fetch("config_path", "tailwind.config.js")
-      @postcss = "postcss.config.js"
+      @postcss = config.fetch("postcss", "postcss.config.js")
       @inputs = Array.wrap(config["input"])
       @output = config.fetch("output", "_site/assets/css/app.css")
       @minify = config.fetch("minify", false)
