@@ -8,7 +8,7 @@ require "tailwindcss/ruby"
 module Jekyll
   class Tailwind
 
-    def intialize(config)
+    def initialize(config)
       @config = config.fetch("config_path", "tailwind.config.js")
       @postcss = "postcss.config.js"
       @inputs = array_wrap(config["input"])
