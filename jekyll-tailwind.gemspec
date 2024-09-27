@@ -5,7 +5,7 @@ require_relative "lib/jekyll-tailwind/version"
 Gem::Specification.new do |spec|
   spec.name = "jekyll-tailwind"
   spec.version = Jekyll::Tailwind::VERSION
-  spec.authors = ["crbelaus", "skatkov"]
+  spec.authors = ["crbelaus", "Stanislav (Stas) Katkov"]
   spec.email = ["cristian@crbelaus.com", "github@skatkov.com"]
 
   spec.summary = "Use Tailwind CLI from your Jekyll site"
