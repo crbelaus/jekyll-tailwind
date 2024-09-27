@@ -61,3 +61,7 @@ It's possible to pick particular version of tailwindd by locking `tailwindcss-ru
 or if you're looking for a 4v:
 
 `gem 'tailwindcss-ruby', '>=4'`
+
+
+## Troubleshooting
+You may run into issues with tailwind executable, please refer to [troubleshooting section in tailwindcss-ruby gem](https://github.com/flavorjones/tailwindcss-ruby?tab=readme-ov-file#troubleshooting).
