@@ -16,45 +16,52 @@ end
 2. Add **tailwind.config.js** to root directory with following contents
 ```js
 module.exports = {
-  content: ["./**/*.html", "./**/*.md"],
+  content: ["./**/*.html"],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/container-queries')
+  ],
 };
 ```
 
-3. Add **assets/app.css** file with following contents
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-4. Modify default template to include app.css, e.g.:
+3. Modify default template to include app.css, e.g.:
 `<link rel="stylesheet" href="{{ "/assets/css/app.css" | relative_url }}">`
 
 **The first time you build your Jekyll site, this gem will automatically download the Tailwind CLI for your platform and use it to build your CSS.** The Tailwind CLI will be saved in `_tailwind/tailwind-VERSION-PLATFORM`. It is recommended that you add this file to your `.gitignore` and don't commit it to your repository.
 
 It is important to note that **subsequent runs will use the existing Tailwind CLI and won't download it again.**
 
-## Customize the Tailwind version
+## Adjust tailwind configuration
 
-Although not strictly necessary, it is recommended to pin your desired Tailwind CLI version in `_config.yml`.
+By default Tailwind will:
+- read the `tailwind.config.js` file that lives in your project's root (more info at [the Tailwind docs](https://tailwindcss.com/docs/configuration)).
+- Output file will also be written into `_site/assets/css/app.css`.
+- Process postcss if `postcss.config.js` is present in the root directory.
 
-```yml
-tailwind:
-  version: 3.4.1
-```
-
-If you don't do this, the gem will automatically download the latest Tailwind CLI version that was available when gem was published.
-
-## Read the Tailwind configuration from an alternative path
-
-By default Tailwind will read the `tailwind.config.js` file that lives in your project's root (more info at [the Tailwind docs](https://tailwindcss.com/docs/configuration)).
-
-If your configuration file lives elsewhere you can say so in the `_config.yml` file:
+But it's possible to tweak these settings through `_config.yml` file:
 
 ```yml
 tailwind:
-  config_path: assets/tailwind.config.js
+  config: config/tailwind.config.js
+  input: assets/css/app.css # or [assets/css/app.css, assets/css/web.css]
+  output: _site/assets/css/web.css
+  postcss: config/postcss.config.js # default is nil
+  minify: true # defaults to false
 ```
+
+## Picking Tailwind version
+It's possible to pick particular version of tailwindd by locking `tailwindcss-ruby` dependency to certain version. Add following to your Gemfile:
+
+`gem 'tailwindcss-ruby', '>=3', '<4'`
+
+or if you're looking for a 4v:
+
+`gem 'tailwindcss-ruby', '>=4'`
+
+
+## Troubleshooting
+You may run into issues with tailwind executable, please refer to [troubleshooting section in tailwindcss-ruby gem](https://github.com/flavorjones/tailwindcss-ruby?tab=readme-ov-file#troubleshooting).

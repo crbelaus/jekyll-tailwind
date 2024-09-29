@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    jekyll-tailwind (0.1.0)
+    jekyll-tailwind (1.0.0)
       jekyll (>= 3.0, < 5.0)
+      tailwindcss-ruby
 
 GEM
   remote: https://rubygems.org/
@@ -106,6 +107,8 @@ GEM
     standard-performance (1.3.1)
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.20.2)
+    tailwindcss-ruby (3.4.13)
+    tailwindcss-ruby (3.4.13-arm64-darwin)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
     unicode-display_width (2.5.0)

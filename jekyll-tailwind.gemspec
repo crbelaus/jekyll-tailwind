@@ -5,8 +5,8 @@ require_relative "lib/jekyll-tailwind/version"
 Gem::Specification.new do |spec|
   spec.name = "jekyll-tailwind"
   spec.version = Jekyll::Tailwind::VERSION
-  spec.authors = ["crbelaus"]
-  spec.email = ["cristian@crbelaus.com"]
+  spec.authors = ["crbelaus", "Stanislav (Stas) Katkov"]
+  spec.email = ["cristian@crbelaus.com", "github@skatkov.com"]
 
   spec.summary = "Use Tailwind CLI from your Jekyll site"
   spec.description = "Run TailwindCSS from your Jekyll site without requiring NodeJS"
@@ -31,6 +31,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "jekyll", ">= 3.0", "< 5.0"
+  spec.add_dependency "tailwindcss-ruby"
+  # Let's use it to publish to rubygems (e.g. rake release)
+  spec.add_development_dependency "rake"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
