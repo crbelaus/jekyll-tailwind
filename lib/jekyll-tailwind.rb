@@ -10,7 +10,7 @@ module Jekyll
 
     def initialize(config)
       if config["config_path"]
-        Jekyll.logger.warn "WARNING: The `config_path` option is deprecated and will be removed in the next release. Please use the `config` option instead."
+        Jekyll.logger.warn "WARNING: The `config_path` option is deprecated and will be removed in the next releases. Please use the `config` option instead."
       end
       if config["version"]
         Jekyll.logger.warn "WARNING: The `version` option has no effect, version could be managed through 'tailwindcss-ruby' gem in you're Gemfile."
