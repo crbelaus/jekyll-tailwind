@@ -1,4 +1,4 @@
-## [Unreleased]
+## [2.0.0] - 2024-09-30
 ### New
 - Use tailwindcss-ruby gem as a wrapper for executable.
 - Expose `input` and `output` parameters in _config.yml.
