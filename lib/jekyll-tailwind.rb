@@ -9,7 +9,14 @@ module Jekyll
   class Tailwind
 
     def initialize(config)
-      @config = config.fetch("config_path", "tailwind.config.js")
+      if config["config_path"]
+        Jekyll.logger.warn "WARNING: The `config_path` option is deprecated and will be removed in the next releases. Please use the `config` option instead."
+      end
+      if config["version"]
+        Jekyll.logger.warn "WARNING: The `version` option has no effect, version could be managed through 'tailwindcss-ruby' gem in you're Gemfile."
+      end
+
+      @config = config["config_path"] || config["config"] || "tailwind.config.js"
       @postcss = config.fetch("postcss", "postcss.config.js")
       @inputs = Array.wrap(config["input"])
       @output = config.fetch("output", "_site/assets/css/app.css")
