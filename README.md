@@ -12,8 +12,13 @@ group :jekyll_plugins do
   gem 'jekyll-tailwind'
 end
 ```
+2. Add plugin to _config.yml:
+```
+plugins:
+  - jekyll-heroicons
+```
 
-2. Add **tailwind.config.js** to root directory with following contents
+3. Add **tailwind.config.js** to root directory with following contents
 ```js
 module.exports = {
   content: ["./**/*.html"],
@@ -28,12 +33,9 @@ module.exports = {
 };
 ```
 
-3. Modify default template to include app.css, e.g.:
+4. Modify default template to include app.css, e.g.:
 `<link rel="stylesheet" href="{{ "/assets/css/app.css" | relative_url }}">`
 
-**The first time you build your Jekyll site, this gem will automatically download the Tailwind CLI for your platform and use it to build your CSS.** The Tailwind CLI will be saved in `_tailwind/tailwind-VERSION-PLATFORM`. It is recommended that you add this file to your `.gitignore` and don't commit it to your repository.
-
-It is important to note that **subsequent runs will use the existing Tailwind CLI and won't download it again.**
 
 ## Adjust tailwind configuration
 
