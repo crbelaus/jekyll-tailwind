@@ -13,9 +13,9 @@ group :jekyll_plugins do
 end
 ```
 2. Add plugin to _config.yml:
-```
+```yml
 plugins:
-  - jekyll-heroicons
+  - jekyll-tailwind
 ```
 
 3. Add **tailwind.config.js** to root directory with following contents
