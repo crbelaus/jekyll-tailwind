@@ -1,3 +1,7 @@
+## Unreleased
+### Fixed
+- Correctly pass multiple input files through a single --input flag
+
 ## [2.0.0] - 2024-09-30
 ### New
 - Use tailwindcss-ruby gem as a wrapper for executable.
