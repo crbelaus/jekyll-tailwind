@@ -30,11 +30,8 @@ module Jekyll
                 "--config", @config,
               ]
 
-      @inputs.each do |input|
-        # There could be multiple input files or non at all.
-        command += ["--input", input]
-      end
-
+      # There could be multiple input files or non at all.
+      command += ["--input", @inputs.join(' ')]
       command += ["--minify"] if @minify
       command += ["--postcss", @postcss] if File.exist?(@postcss)
 
