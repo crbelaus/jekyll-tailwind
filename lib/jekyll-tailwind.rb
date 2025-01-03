@@ -31,7 +31,7 @@ module Jekyll
               ]
 
       # There could be multiple input files or non at all.
-      command += ["--input", @inputs.join(' ')]
+      command += ["--input", @inputs.join(' ')] unless @inputs.empty?
       command += ["--minify"] if @minify
       command += ["--postcss", @postcss] if File.exist?(@postcss)
 
