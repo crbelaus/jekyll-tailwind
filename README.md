@@ -49,7 +49,7 @@ But it's possible to tweak these settings through `_config.yml` file:
 ```yml
 tailwind:
   config: config/tailwind.config.js
-  input: assets/css/app.css # or [assets/css/app.css, assets/css/web.css]
+  input: assets/css/app.css
   output: _site/assets/css/web.css
   postcss: config/postcss.config.js # default is nil
   minify: true # defaults to false

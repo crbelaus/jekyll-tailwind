@@ -18,7 +18,16 @@ module Jekyll
 
       @config = config["config_path"] || config["config"] || "tailwind.config.js"
       @postcss = config.fetch("postcss", "postcss.config.js")
-      @inputs = Array.wrap(config["input"])
+
+      @input = if config["input"].is_a?(Array)
+        Jekyll.logger.warn "DEPRECATION: jekyll-tailwind gem can't have multiple input files. Ability to provide array as input is gradually getting fazed out. Change following `[assets/css/app.css]` value to `assets/css/app.css`"
+
+        raise "Multiple input files are not supported" if config["input"].length > 1
+
+        config["input"].first
+      else
+        config["input"]
+      end
       @output = config.fetch("output", "_site/assets/css/app.css")
       @minify = config.fetch("minify", false)
     end
@@ -32,9 +41,10 @@ module Jekyll
 
       @inputs.each do |input|
         # There could be multiple input files or non at all.
-        command += ["--input", input]
+
       end
 
+      command += ["--input", @input] if @input
       command += ["--minify"] if @minify
       command += ["--postcss", @postcss] if File.exist?(@postcss)
 
