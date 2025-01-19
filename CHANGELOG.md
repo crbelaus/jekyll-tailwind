@@ -1,3 +1,10 @@
+## Unreleased
+### Changed
+- We emit a deprecation warning if Arrays is used for input config.
+
+### Added
+- Fail a build, if there are multiple input files defined.
+
 ## [2.0.0] - 2024-09-30
 ### New
 - Use tailwindcss-ruby gem as a wrapper for executable.

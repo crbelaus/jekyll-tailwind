@@ -7,7 +7,6 @@ require "tailwindcss/ruby"
 
 module Jekyll
   class Tailwind
-
     def initialize(config)
       if config["config_path"]
         Jekyll.logger.warn "WARNING: The `config_path` option is deprecated and will be removed in the next releases. Please use the `config` option instead."
@@ -18,7 +17,16 @@ module Jekyll
 
       @config = config["config_path"] || config["config"] || "tailwind.config.js"
       @postcss = config.fetch("postcss", "postcss.config.js")
-      @inputs = Array.wrap(config["input"])
+
+      @input = if config["input"].is_a?(Array)
+        Jekyll.logger.warn "DEPRECATION: jekyll-tailwind gem can't have multiple input files. Ability to provide array as input will be gradually fazed out. Change array value like this `[assets/css/app.css]` to `assets/css/app.css`"
+
+        raise "Multiple input files are not supported" if config["input"].length > 1
+
+        config["input"].first
+      else
+        config["input"]
+      end
       @output = config.fetch("output", "_site/assets/css/app.css")
       @minify = config.fetch("minify", false)
     end
@@ -30,28 +38,11 @@ module Jekyll
                 "--config", @config,
               ]
 
-      @inputs.each do |input|
-        # There could be multiple input files or non at all.
-        command += ["--input", input]
-      end
-
+      command += ["--input", @input] if @input
       command += ["--minify"] if @minify
       command += ["--postcss", @postcss] if File.exist?(@postcss)
 
       `#{command.join(' ')}`
-    end
-  end
-end
-
-class Array
-  # Taken from rails/activesupport/lib/active_support/core_ext/array/wrap.rb
-  def self.wrap(object)
-    if object.nil?
-      []
-    elsif object.respond_to?(:to_ary)
-      object.to_ary || [object]
-    else
-      [object]
     end
   end
 end
