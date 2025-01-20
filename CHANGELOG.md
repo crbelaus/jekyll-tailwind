@@ -1,4 +1,6 @@
 ## Unreleased
+
+## [2.1.0] - 2025-01-20
 ### Changed
 - We emit a deprecation warning if Arrays is used for input config.
 
