@@ -2,6 +2,7 @@
 
 require_relative "jekyll-tailwind/version"
 
+require "shellwords"
 require "jekyll"
 require "tailwindcss/ruby"
 
@@ -33,14 +34,14 @@ module Jekyll
 
     def compile
       command = [
-                Tailwindcss::Ruby.executable,
-                "--output", @output,
-                "--config", @config,
+                Shellwords.escape(Tailwindcss::Ruby.executable),
+                "--output", @output.shellescape,
+                "--config", @config.shellescape,
               ]
 
-      command += ["--input", @input] if @input
+      command += ["--input", @input.shellescape] if @input
       command += ["--minify"] if @minify
-      command += ["--postcss", @postcss] if File.exist?(@postcss)
+      command += ["--postcss", @postcss.shellescape] if File.exist?(@postcss)
 
       `#{command.join(' ')}`
     end
