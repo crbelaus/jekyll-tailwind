@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-tailwind (2.1)
+    jekyll-tailwind (2.1.1)
       jekyll (>= 3.0, < 5.0)
       tailwindcss-ruby
 
